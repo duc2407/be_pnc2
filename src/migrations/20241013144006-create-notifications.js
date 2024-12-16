@@ -4,7 +4,6 @@ module.exports = {
     await queryInterface.createTable('notifications', {
       id: {
         type: Sequelize.INTEGER,
-        autoIncrement: true,
         primaryKey: true,
       },
       title: {

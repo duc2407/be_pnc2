@@ -1,5 +1,5 @@
 import db from '../models';
-
+const Sequelize = require('sequelize');
 let getAllUsers = () => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -15,6 +15,7 @@ let getAllUsers = () => {
     }
   });
 };
+
 let getAllDoctors = () => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -23,6 +24,18 @@ let getAllDoctors = () => {
           exclude: ['password'],
         },
         where: { roleId: 4 },
+        include: [
+          {
+            model: db.Clinic,
+            as: 'clinic',
+            // Thực hiện join thủ công qua clinic_id
+            where: Sequelize.where(
+              Sequelize.col('Users.clinic_id'),
+              '=',
+              Sequelize.col('clinic.id'),
+            ),
+          },
+        ],
       });
       resolve(doctors);
     } catch (e) {

@@ -116,9 +116,79 @@ let handleGetAllbookingSchedule = async (req, res) => {
     });
   }
 };
+let updateStatus = async (req, res) => {
+  try {
+    // Lấy id và statusId từ request body
+    let { id, statusId } = req.body;
+
+    // Kiểm tra dữ liệu đầu vào
+    if (!id || !statusId) {
+      return res.status(400).json({
+        message: 'Thiếu id hoặc statusId',
+      });
+    }
+
+    // Gọi service để cập nhật status
+    let updatedBookingSchedule =
+      await bookingScheduleService.updateStatusBookingScheduleById(
+        id,
+        statusId,
+      );
+
+    // Trả về response thành công
+    return res.status(200).json({
+      message: 'Cập nhật status thành công',
+      data: updatedBookingSchedule,
+    });
+  } catch (error) {
+    // Xử lý lỗi
+    return res.status(500).json({
+      message: 'Cập nhật status thất bại',
+      error: error.message,
+    });
+  }
+};
+
+let updateDoctorBySchedule = async (req, res) => {
+  try {
+    // Lấy id và statusId từ request body
+    let { id, status_id, image, result, reDate } = req.body;
+
+    // Kiểm tra dữ liệu đầu vào
+    if (!id || !status_id) {
+      return res.status(400).json({
+        message: 'Thiếu id hoặc status_id',
+      });
+    }
+
+    // Gọi service để cập nhật status
+    let updatedBookingSchedule =
+      await bookingScheduleService.updateStatusBookingScheduleByIdWithDoctor({
+        id,
+        status_id,
+        image,
+        result,
+        reDate,
+      });
+
+    // Trả về response thành công
+    return res.status(200).json({
+      message: 'Cập nhật thành công',
+      data: updatedBookingSchedule,
+    });
+  } catch (error) {
+    // Xử lý lỗi
+    return res.status(500).json({
+      message: 'Cập nhật thất bại',
+      error: error.message,
+    });
+  }
+};
 module.exports = {
   postCreatebookingSchedule: postCreatebookingSchedule,
   handleGetAllbookingScheduleByUserId: handleGetAllbookingScheduleByUserId,
   handleGetAllbookingScheduleByDoctorId: handleGetAllbookingScheduleByDoctorId,
   handleGetAllbookingSchedule: handleGetAllbookingSchedule,
+  updateStatus: updateStatus,
+  updateDoctorBySchedule: updateDoctorBySchedule,
 };

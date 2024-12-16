@@ -40,6 +40,12 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DOUBLE,
         allowNull: false,
       },
+      image: {
+        type: DataTypes.STRING,
+      },
+      reDate: {
+        type: DataTypes.STRING,
+      },
       result: {
         type: DataTypes.STRING,
       },
@@ -70,10 +76,6 @@ module.exports = (sequelize, DataTypes) => {
     BookingSchedule.belongsTo(models.Status, {
       foreignKey: 'status_id',
       as: 'status',
-    });
-    BookingSchedule.belongsTo(models.Prescriptions, {
-      foreignKey: 'prescriptions_id',
-      as: 'prescriptions',
     });
   };
 

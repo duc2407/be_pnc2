@@ -37,13 +37,14 @@ let postCreateUser = async (req, res) => {
 let handleLoging = async (req, res) => {
   let account = req.body.email;
   let password = req.body.password;
-  if (!account || !password) {
+  if (!account || !password || account == '' || password == '') {
     return res.status(500).json({
       status: 500,
       errCode: 1,
-      message: 'Missing inputs parameter!',
+      message: 'Vui lòng nhập đầy đủ thông tin!',
     });
   }
+
   let userData = await userService.handleUserLogin(account, password);
 
   return res.status(200).json({
@@ -51,6 +52,7 @@ let handleLoging = async (req, res) => {
     errCode: userData.errCode,
     message: userData.errMessage,
     user: userData.user ? userData.user : {},
+    adress: userData.adress,
   });
 };
 
@@ -67,8 +69,23 @@ const updateUserController = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
+const updateAvatar = async (req, res) => {
+  try {
+    let userData = { id: req.body.id, image: req.body.image };
+
+    let user = await userService.editAvatarUser(userData);
+
+    return res
+      .status(200)
+      .json({ status: 200, message: 'User updated successfully', user: user });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   postCreateUser: postCreateUser,
   handleLoging: handleLoging,
   updateUserController: updateUserController,
+  updateAvatar: updateAvatar,
 };

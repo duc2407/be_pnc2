@@ -20,10 +20,10 @@ module.exports = {
       },
       address_id: {
         type: Sequelize.STRING,
-        references: {
-          model: 'address_clinic',
-          key: 'id',
-        },
+        // references: {
+        //   model: 'address_clinic',
+        //   key: 'id',
+        // },
       },
       number_phone: {
         type: Sequelize.STRING,

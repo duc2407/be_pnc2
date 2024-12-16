@@ -58,19 +58,19 @@ module.exports = {
         type: Sequelize.DOUBLE,
         allowNull: false,
       },
+      image: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       result: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      prescriptions_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'prescriptions',
-          key: 'id',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
+      reDate: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
+
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,

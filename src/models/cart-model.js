@@ -1,38 +1,33 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Cart = sequelize.define('Cart', {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
+  const Cart = sequelize.define(
+    'Cart',
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      detail_cart: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
     },
-    user_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+    {
+      tableName: 'cart',
     },
-    product_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    quantity: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 1,
-    },
-  }, {
-    tableName: 'cart',
-  });
+  );
 
-  Cart.associate = (models) => {
-    Cart.belongsTo(models.Users, {
-      foreignKey: 'user_id',
-      as: 'user',
-    });
-    Cart.belongsTo(models.Product, {
-      foreignKey: 'product_id',
-      as: 'product',
-    });
-  };
+  // Cart.associate = (models) => {
+  //   Cart.belongsTo(models.Users, {
+  //     foreignKey: 'user_id',
+  //     as: 'user',
+  //   });
+  //   // Cart.belongsTo(models.Product, {
+  //   //   foreignKey: 'product_id',
+  //   //   as: 'product',
+  //   // });
+  // };
 
   return Cart;
 };

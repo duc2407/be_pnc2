@@ -6,9 +6,7 @@ import cookieParser from 'cookie-parser';
 import methodOverride from 'method-override';
 import connection from './configs/connectBD.js';
 import cors from 'cors';
-
 const app = express();
-
 // Cấu hình CORS
 app.use(cors({ origin: 'http://localhost:2407', credentials: true }));
 

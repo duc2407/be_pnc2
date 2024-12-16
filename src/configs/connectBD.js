@@ -5,7 +5,6 @@ const sequelize = new Sequelize('pnc2', 'root', null, {
   dialectModule: require('mysql2'),
 });
 
-
 const connection = async () => {
   try {
     await sequelize.authenticate();

@@ -71,6 +71,12 @@ module.exports = {
       clinic_id: {
         allowNull: true,
         type: Sequelize.INTEGER,
+        references: {
+          model: 'clinic',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
       },
       describe: {
         allowNull: true,
