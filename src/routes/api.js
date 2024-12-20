@@ -14,6 +14,7 @@ import uploadController from '../controller/uploadController';
 import cartController from '../controller/cartController';
 import orderController from '../controller/orderController';
 import adressController from '../controller/adressController';
+import zalopayController from '../controller/controllerZaloPay';
 let router = express.Router();
 
 const multer = require('multer');
@@ -40,6 +41,12 @@ let initRoutesApi = (app) => {
     upload.single('image'),
     uploadController.uploadImage,
   );
+  router.post('/api/payment/create', zalopayController.createPayment);
+  router.post(
+    '/api/payment/notification',
+    zalopayController.handlePaymentNotification,
+  );
+
   //admin
   router.post('/api/login-management', doctorController.handleLoging);
   router.post(
